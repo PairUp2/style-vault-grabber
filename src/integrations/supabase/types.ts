@@ -14,6 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          author: string | null
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          is_published: boolean
+          published_at: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          is_published?: boolean
+          published_at?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          is_published?: boolean
+          published_at?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_videos: {
+        Row: {
+          category: string
+          created_at: string
+          elementor_id: string | null
+          id: string
+          is_added: boolean
+          is_deleted: boolean
+          is_elementor: boolean
+          label: string
+          order_index: number
+          original_id: string | null
+          original_url: string | null
+          override_url: string | null
+          page: string | null
+          section: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          elementor_id?: string | null
+          id?: string
+          is_added?: boolean
+          is_deleted?: boolean
+          is_elementor?: boolean
+          label?: string
+          order_index?: number
+          original_id?: string | null
+          original_url?: string | null
+          override_url?: string | null
+          page?: string | null
+          section?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          elementor_id?: string | null
+          id?: string
+          is_added?: boolean
+          is_deleted?: boolean
+          is_elementor?: boolean
+          label?: string
+          order_index?: number
+          original_id?: string | null
+          original_url?: string | null
+          override_url?: string | null
+          page?: string | null
+          section?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       video_overrides: {
         Row: {
           created_at: string
@@ -55,10 +172,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -185,6 +308,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

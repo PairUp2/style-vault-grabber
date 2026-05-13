@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYNEX Admin - Video Manager</title>
+    <title>CYNEX Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -17,27 +17,16 @@
         font-family: "Inter", sans-serif;
         background: #0f172a;
         color: #f8fafc;
-        overflow-x: hidden;
       }
       .glass {
         background: rgba(30, 41, 59, 0.7);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
       .glass-card {
         background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
-        backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.05);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-      .glass-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-        border-color: rgba(99, 102, 241, 0.4);
       }
       .gradient-text {
         background: linear-gradient(to right, #818cf8, #c084fc);
@@ -45,35 +34,28 @@
         -webkit-text-fill-color: transparent;
       }
       .input-glass {
-        background: rgba(15, 23, 42, 0.5);
+        background: rgba(15, 23, 42, 0.6);
         border: 1px solid rgba(255, 255, 255, 0.1);
         color: #fff;
       }
       .input-glass:focus {
         outline: none;
         border-color: #818cf8;
-        box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
       }
       .btn-gradient {
         background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-        color: white;
-        transition: all 0.3s ease;
+        color: #fff;
       }
       .btn-gradient:hover {
         background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
       }
       .btn-danger {
-        background: rgba(239, 68, 68, 0.1);
+        background: rgba(239, 68, 68, 0.15);
         border: 1px solid rgba(239, 68, 68, 0.3);
         color: #fca5a5;
-        transition: all 0.3s ease;
       }
       .btn-danger:hover {
-        background: rgba(239, 68, 68, 0.2);
-        border-color: rgba(239, 68, 68, 0.5);
-        color: #f87171;
+        background: rgba(239, 68, 68, 0.3);
       }
       .loader {
         border: 3px solid rgba(255, 255, 255, 0.1);
@@ -84,219 +66,270 @@
         animation: spin 1s linear infinite;
       }
       @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
+        to {
           transform: rotate(360deg);
         }
       }
     </style>
   </head>
-  <body class="antialiased min-h-screen flex flex-col relative">
-    <!-- Background decorative elements -->
-    <div
-      class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[120px] pointer-events-none z-0"
-    ></div>
-    <div
-      class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/20 blur-[120px] pointer-events-none z-0"
-    ></div>
-
-    <div id="root" class="relative z-10 flex-1"></div>
-
+  <body>
+    <div id="root"></div>
     <script type="text/babel">
-      const { useState, useEffect } = React;
+      const { useState, useEffect, useCallback } = React;
+      const PW_KEY = "cynex_admin_pw";
+
+      function authHeaders() {
+        const pw = localStorage.getItem(PW_KEY) || "";
+        return { "Content-Type": "application/json", "x-admin-password": pw };
+      }
 
       function App() {
-        const [videos, setVideos] = useState([]);
-        const [loading, setLoading] = useState(true);
-        const [searchTerm, setSearchTerm] = useState("");
-        const [notification, setNotification] = useState(null);
-        const [isAuthenticated, setIsAuthenticated] = useState(false);
-        const [password, setPassword] = useState("");
-        const [authError, setAuthError] = useState("");
+        const [authed, setAuthed] = useState(!!localStorage.getItem(PW_KEY));
+        const [tab, setTab] = useState("videos");
+        const [toast, setToast] = useState(null);
 
-        useEffect(() => {
-          const auth = localStorage.getItem("cynex_admin_auth");
-          if (auth === "true") {
-            setIsAuthenticated(true);
-            fetchVideos();
-          }
-        }, []);
+        const showToast = (message, type = "success") => {
+          setToast({ message, type });
+          setTimeout(() => setToast(null), 3000);
+        };
 
-        const handleLogin = async (e) => {
+        if (!authed) return <Login onSuccess={() => setAuthed(true)} />;
+
+        return (
+          <div class="min-h-screen p-4 md:p-8">
+            <div class="max-w-7xl mx-auto">
+              <header class="glass rounded-2xl p-6 mb-6 flex flex-wrap justify-between items-center gap-4">
+                <div>
+                  <h1 class="text-2xl md:text-3xl font-bold gradient-text">CYNEX Production</h1>
+                  <p class="text-slate-400 text-sm">Site content management</p>
+                </div>
+                <div class="flex gap-2">
+                  <button
+                    onClick={() => setTab("videos")}
+                    class={`px-4 py-2 rounded-lg text-sm font-semibold ${tab === "videos" ? "btn-gradient" : "glass"}`}
+                  >
+                    Videos
+                  </button>
+                  <button
+                    onClick={() => setTab("blog")}
+                    class={`px-4 py-2 rounded-lg text-sm font-semibold ${tab === "blog" ? "btn-gradient" : "glass"}`}
+                  >
+                    Blog
+                  </button>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem(PW_KEY);
+                      setAuthed(false);
+                    }}
+                    class="px-4 py-2 rounded-lg text-sm font-semibold btn-danger"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </header>
+
+              {tab === "videos" && <VideosPanel showToast={showToast} />}
+              {tab === "blog" && <BlogPanel showToast={showToast} />}
+
+              {toast && (
+                <div
+                  class={`fixed bottom-6 right-6 px-5 py-3 rounded-xl glass shadow-2xl ${toast.type === "error" ? "border-red-500/50 text-red-200" : "border-green-500/50 text-green-200"}`}
+                >
+                  {toast.message}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function Login({ onSuccess }) {
+        const [pw, setPw] = useState("");
+        const [error, setError] = useState("");
+        const [loading, setLoading] = useState(false);
+
+        const submit = async (e) => {
           e.preventDefault();
           setLoading(true);
+          setError("");
           try {
             const res = await fetch("/api/admin/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ password }),
+              body: JSON.stringify({ password: pw }),
             });
             const data = await res.json();
             if (data.success) {
-              setIsAuthenticated(true);
-              localStorage.setItem("cynex_admin_auth", "true");
-              fetchVideos();
+              localStorage.setItem(PW_KEY, pw);
+              onSuccess();
             } else {
-              setAuthError(data.error || "Login failed");
+              setError(data.error || "Login failed");
             }
           } catch (e) {
-            setAuthError("Network error");
+            setError("Network error");
           }
           setLoading(false);
         };
 
-        const fetchVideos = async () => {
+        return (
+          <div class="flex items-center justify-center min-h-screen p-4">
+            <form onSubmit={submit} class="glass-card p-8 rounded-2xl w-full max-w-md">
+              <h2 class="text-2xl font-bold mb-6 gradient-text text-center">CYNEX Admin</h2>
+              <input
+                type="password"
+                class="w-full input-glass rounded-lg px-4 py-2 mb-4"
+                value={pw}
+                onChange={(e) => setPw(e.target.value)}
+                placeholder="Admin password"
+                required
+                autoFocus
+              />
+              {error && <p class="text-red-400 text-sm mb-4">{error}</p>}
+              <button
+                type="submit"
+                disabled={loading}
+                class="w-full btn-gradient py-2 rounded-lg font-semibold flex justify-center"
+              >
+                {loading ? <div class="loader"></div> : "Login"}
+              </button>
+            </form>
+          </div>
+        );
+      }
+
+      function VideosPanel({ showToast }) {
+        const [videos, setVideos] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [search, setSearch] = useState("");
+        const [showAdd, setShowAdd] = useState(false);
+
+        const load = useCallback(async () => {
           setLoading(true);
           try {
-            const res = await fetch("/api/admin/videos");
+            const res = await fetch("/api/admin/videos", { headers: authHeaders() });
+            if (res.status === 401) {
+              localStorage.removeItem(PW_KEY);
+              window.location.reload();
+              return;
+            }
             const data = await res.json();
             setVideos(data.videos || []);
           } catch (e) {
-            showNotification("Failed to fetch videos", "error");
+            showToast("Failed to load videos", "error");
           }
           setLoading(false);
+        }, []);
+
+        useEffect(() => {
+          load();
+        }, [load]);
+
+        const updateVideo = async (id, payload) => {
+          try {
+            const res = await fetch("/api/admin/videos", {
+              method: "POST",
+              headers: authHeaders(),
+              body: JSON.stringify({ id, ...payload }),
+            });
+            const data = await res.json();
+            if (data.success) {
+              setVideos((vs) => vs.map((v) => (v.id === id ? { ...v, ...data.video } : v)));
+              showToast("Saved");
+            } else {
+              showToast(data.error || "Save failed", "error");
+            }
+          } catch (e) {
+            showToast("Network error", "error");
+          }
         };
 
-        const showNotification = (message, type = "success") => {
-          setNotification({ message, type });
-          setTimeout(() => setNotification(null), 3000);
+        const deleteVideo = async (id) => {
+          if (!confirm("Permanently delete this video?")) return;
+          try {
+            const res = await fetch("/api/admin/videos", {
+              method: "POST",
+              headers: authHeaders(),
+              body: JSON.stringify({ id, permanent_delete: true }),
+            });
+            const data = await res.json();
+            if (data.success) {
+              setVideos((vs) => vs.filter((v) => v.id !== id));
+              showToast("Deleted");
+            } else {
+              showToast(data.error || "Delete failed", "error");
+            }
+          } catch (e) {
+            showToast("Network error", "error");
+          }
         };
 
-        if (!isAuthenticated) {
+        const addVideo = async (payload) => {
+          try {
+            const res = await fetch("/api/admin/videos", {
+              method: "POST",
+              headers: authHeaders(),
+              body: JSON.stringify({ create: true, ...payload }),
+            });
+            const data = await res.json();
+            if (data.success) {
+              setVideos((vs) => [...vs, data.video]);
+              setShowAdd(false);
+              showToast("Video added");
+            } else {
+              showToast(data.error || "Add failed", "error");
+            }
+          } catch (e) {
+            showToast("Network error", "error");
+          }
+        };
+
+        const filtered = videos.filter((v) => {
+          const q = search.toLowerCase();
           return (
-            <div class="flex items-center justify-center min-h-screen">
-              <div class="glass-card p-8 rounded-2xl w-full max-w-md">
-                <h2 class="text-2xl font-bold mb-6 gradient-text text-center">Admin Login</h2>
-                <form onSubmit={handleLogin} class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Password</label>
-                    <input
-                      type="password"
-                      class="w-full input-glass rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter password"
-                      required
-                    />
-                  </div>
-                  {authError && <p class="text-red-400 text-sm">{authError}</p>}
-                  <button
-                    type="submit"
-                    class="w-full btn-gradient py-2 rounded-lg font-semibold flex justify-center items-center"
-                    disabled={loading}
-                  >
-                    {loading ? <div class="loader"></div> : "Login"}
-                  </button>
-                </form>
-              </div>
-            </div>
+            !q ||
+            (v.page || "").toLowerCase().includes(q) ||
+            (v.section || "").toLowerCase().includes(q) ||
+            (v.label || "").toLowerCase().includes(q) ||
+            (v.original_id || "").toLowerCase().includes(q)
           );
-        }
-
-        const filteredVideos = videos.filter(
-          (v) =>
-            (v.page && v.page.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (v.section && v.section.toLowerCase().includes(searchTerm.toLowerCase())),
-        );
+        });
 
         return (
-          <div class="container mx-auto px-4 py-8 max-w-7xl">
-            <header class="glass rounded-2xl p-6 mb-8 flex justify-between items-center shadow-xl">
-              <div>
-                <h1 class="text-3xl font-bold gradient-text mb-1">CYNEX Production</h1>
-                <p class="text-slate-400 text-sm">Video Management System</p>
-              </div>
-              <div class="relative w-64">
-                <svg
-                  class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  ></path>
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Search pages or sections..."
-                  class="w-full input-glass rounded-full py-2 pl-10 pr-4 text-sm transition-all focus:w-72"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </header>
-
-            {notification && (
-              <div
-                class={`fixed top-4 right-4 p-4 rounded-xl shadow-2xl transition-all z-50 glass ${notification.type === "error" ? "border-red-500/50 text-red-200" : "border-green-500/50 text-green-200"}`}
+          <div>
+            <div class="flex flex-wrap gap-3 mb-6 items-center">
+              <input
+                type="text"
+                placeholder="Search by page, section, label, ID..."
+                class="flex-1 min-w-[240px] input-glass rounded-lg px-4 py-2"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button
+                onClick={() => setShowAdd(true)}
+                class="btn-gradient px-5 py-2 rounded-lg font-semibold"
               >
-                <div class="flex items-center gap-3">
-                  {notification.type === "error" ? (
-                    <svg
-                      class="w-5 h-5 text-red-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                  ) : (
-                    <svg
-                      class="w-5 h-5 text-green-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                  )}
-                  <p class="font-medium">{notification.message}</p>
-                </div>
-              </div>
-            )}
+                + Add Video
+              </button>
+            </div>
+
+            {showAdd && <AddVideoForm onAdd={addVideo} onCancel={() => setShowAdd(false)} />}
 
             {loading ? (
-              <div class="flex justify-center items-center h-64">
+              <div class="flex justify-center py-20">
                 <div class="loader"></div>
               </div>
             ) : (
-              <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredVideos.map((video) => (
-                  <VideoCard key={video.id} video={video} onUpdate={handleUpdate} />
+              <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {filtered.map((v) => (
+                  <VideoCard
+                    key={v.id}
+                    video={v}
+                    onUpdate={updateVideo}
+                    onDelete={deleteVideo}
+                  />
                 ))}
-                {filteredVideos.length === 0 && (
-                  <div class="col-span-full flex flex-col items-center justify-center h-64 glass-card rounded-2xl text-slate-400">
-                    <svg
-                      class="w-12 h-12 mb-4 opacity-50"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
-                      ></path>
-                    </svg>
-                    <p class="text-lg">No videos found matching your search.</p>
-                  </div>
+                {filtered.length === 0 && (
+                  <div class="col-span-full text-center text-slate-400 py-20">No videos.</div>
                 )}
               </div>
             )}
@@ -304,190 +337,367 @@
         );
       }
 
-      function VideoCard({ video, onUpdate }) {
+      function AddVideoForm({ onAdd, onCancel }) {
+        const [label, setLabel] = useState("");
+        const [url, setUrl] = useState("");
+        const [category, setCategory] = useState("brand");
+
+        const submit = (e) => {
+          e.preventDefault();
+          if (!url) return;
+          // try to extract YouTube ID
+          const m =
+            url.match(/youtube\.com\/(?:embed\/|watch\?v=)([A-Za-z0-9_-]+)/) ||
+            url.match(/youtu\.be\/([A-Za-z0-9_-]+)/);
+          const ytId = m ? m[1] : null;
+          const embedUrl = ytId ? `https://www.youtube.com/embed/${ytId}` : url;
+          onAdd({
+            label: label || "Video",
+            override_url: embedUrl,
+            original_id: ytId,
+            original_url: url,
+            category,
+            is_added: true,
+          });
+        };
+
+        return (
+          <form onSubmit={submit} class="glass-card rounded-2xl p-5 mb-6 grid md:grid-cols-4 gap-3">
+            <input
+              type="text"
+              placeholder="Title (e.g. Brand Reel)"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              class="input-glass rounded-lg px-3 py-2"
+            />
+            <input
+              type="text"
+              placeholder="YouTube URL or embed URL"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              class="input-glass rounded-lg px-3 py-2 md:col-span-2"
+              required
+            />
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              class="input-glass rounded-lg px-3 py-2"
+            >
+              <option value="brand">Brand</option>
+              <option value="ad">Ad Films</option>
+              <option value="corporate">Corporate</option>
+              <option value="animation">Animation</option>
+              <option value="documentary">Documentary</option>
+            </select>
+            <div class="md:col-span-4 flex gap-2 justify-end">
+              <button type="button" onClick={onCancel} class="glass px-4 py-2 rounded-lg text-sm">
+                Cancel
+              </button>
+              <button type="submit" class="btn-gradient px-5 py-2 rounded-lg text-sm font-semibold">
+                Add
+              </button>
+            </div>
+          </form>
+        );
+      }
+
+      function VideoCard({ video, onUpdate, onDelete }) {
         const [override, setOverride] = useState(video.override_url || "");
-        const [isSaving, setIsSaving] = useState(false);
-
-        const handleSave = async (permanent = false) => {
-          setIsSaving(true);
-          try {
-            const res = await fetch("/api/admin/videos", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                id: video.id,
-                override_url: override.trim() || null,
-                is_deleted: video.is_deleted,
-                permanent_save: permanent,
-              }),
-            });
-            const data = await res.json();
-            if (data.success) {
-              if (permanent) window.location.reload();
-              else await onUpdate(video.id, override.trim() || null, video.is_deleted);
-              showNotification(permanent ? "Saved directly to HTML file!" : "Preview updated!");
-            }
-          } catch (e) {
-            showNotification("Save failed", "error");
-          }
-          setIsSaving(false);
-        };
-
-        const handleToggleDelete = async () => {
-          setIsSaving(true);
-          await onUpdate(video.id, video.override_url, !video.is_deleted);
-          setIsSaving(false);
-        };
-
-        const handlePermanentDelete = async () => {
-          if (
-            !confirm(
-              "Are you sure you want to PERMANENTLY delete this video from the HTML files? This cannot be undone.",
-            )
-          )
-            return;
-          setIsSaving(true);
-          try {
-            const res = await fetch("/api/admin/videos", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ id: video.id, permanent_delete: true }),
-            });
-            const data = await res.json();
-            if (data.success) {
-              window.location.reload();
-            } else {
-              alert(data.error || "Delete failed");
-              setIsSaving(false);
-            }
-          } catch (e) {
-            alert("Network error");
-            setIsSaving(false);
-          }
-        };
-
-        const displayUrl = override || video.original_url;
+        const [label, setLabel] = useState(video.label || "");
+        const [category, setCategory] = useState(video.category || "brand");
+        const displaySrc =
+          override ||
+          (video.original_id ? `https://www.youtube.com/embed/${video.original_id}` : "");
 
         return (
           <div
-            class={`glass-card rounded-2xl overflow-hidden flex flex-col ${video.is_deleted ? "opacity-60 grayscale" : ""}`}
+            class={`glass-card rounded-2xl overflow-hidden flex flex-col ${video.is_deleted ? "opacity-60" : ""}`}
           >
-            <div class="relative pt-[56.25%] bg-black/50 w-full group">
+            <div class="relative pt-[56.25%] bg-black">
               {video.is_deleted ? (
-                <div class="absolute inset-0 flex items-center justify-center bg-red-900/20 backdrop-blur-sm">
-                  <span class="text-red-400 font-bold tracking-widest uppercase border border-red-500/50 px-4 py-1 rounded">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-red-400 font-bold uppercase border border-red-500/50 px-3 py-1 rounded text-xs">
                     Hidden
                   </span>
                 </div>
-              ) : (
+              ) : displaySrc ? (
                 <iframe
-                  src={displayUrl}
-                  class="absolute inset-0 w-full h-full border-0"
-                  title="Video preview"
-                ></iframe>
-              )}
-              <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-xs text-white/80 font-mono border border-white/10">
-                ID: {video.original_id || "Unknown"}
-              </div>
-              {video.is_elementor && (
-                <div class="absolute top-2 left-2 bg-indigo-600/60 backdrop-blur-md px-2 py-1 rounded text-[10px] uppercase text-white/90 font-bold border border-white/10">
-                  Elementor
-                </div>
-              )}
-            </div>
-
-            <div class="p-5 flex flex-col flex-1 gap-4">
-              <div>
-                <div class="text-xs font-semibold text-indigo-400 uppercase tracking-wider mb-1">
-                  Page Context
-                </div>
-                <div class="text-sm text-slate-200 truncate" title={video.page}>
-                  {video.page}
-                </div>
-                <div class="text-xs text-slate-400 mt-0.5 truncate flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    ></path>
-                  </svg>
-                  {video.section}
-                </div>
-              </div>
-
-              <div class="flex-1">
-                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 block">
-                  Video Link
-                </label>
-                <input
-                  type="text"
-                  value={override}
-                  onChange={(e) => setOverride(e.target.value)}
-                  placeholder="https://youtube.com/embed/..."
-                  class="w-full input-glass rounded-lg px-3 py-2 text-sm"
-                  disabled={isSaving}
+                  src={displaySrc}
+                  class="absolute inset-0 w-full h-full"
+                  title="Video"
+                  allowFullScreen
                 />
-                <p class="text-[10px] text-slate-500 mt-1 leading-tight">
-                  Current source: <br />
-                  <span class="truncate block text-slate-600" title={video.original_url}>
-                    {video.original_url}
-                  </span>
-                </p>
+              ) : null}
+            </div>
+            <div class="p-4 flex flex-col gap-3">
+              <div class="text-xs text-slate-400 truncate" title={video.page}>
+                {video.page || "Custom video"}
+                {video.section ? ` — ${video.section}` : ""}
               </div>
-
-              <div class="flex flex-col gap-2 mt-auto pt-4 border-t border-white/10">
-                <div class="flex gap-2">
-                  <button
-                    onClick={() => handleSave(false)}
-                    disabled={isSaving || override === (video.override_url || "")}
-                    class="flex-1 glass rounded-lg py-2 text-[13px] font-semibold hover:bg-white/10 disabled:opacity-50"
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => handleSave(true)}
-                    disabled={isSaving || !override}
-                    class="flex-1 btn-gradient rounded-lg py-2 text-[13px] font-semibold disabled:opacity-50"
-                  >
-                    Save to HTML
-                  </button>
-                </div>
-
-                <div class="flex gap-2">
-                  <button
-                    onClick={handleToggleDelete}
-                    disabled={isSaving}
-                    class={`flex-1 py-2 rounded-lg text-[13px] font-semibold ${video.is_deleted ? "bg-indigo-500/20 text-indigo-300" : "btn-danger"}`}
-                  >
-                    {video.is_deleted ? "Restore" : "Hide"}
-                  </button>
-
-                  <button
-                    onClick={handlePermanentDelete}
-                    disabled={isSaving}
-                    class="px-4 py-2 rounded-lg text-red-500 hover:bg-red-500/20 border border-transparent hover:border-red-500/30 transition-all flex items-center justify-center"
-                    title="Permanently Delete from HTML"
-                  >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
+              <input
+                type="text"
+                value={label}
+                onChange={(e) => setLabel(e.target.value)}
+                placeholder="Label"
+                class="input-glass rounded px-2 py-1 text-sm"
+              />
+              <input
+                type="text"
+                value={override}
+                onChange={(e) => setOverride(e.target.value)}
+                placeholder="Override URL (https://youtube.com/embed/...)"
+                class="input-glass rounded px-2 py-1 text-sm"
+              />
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                class="input-glass rounded px-2 py-1 text-sm"
+              >
+                <option value="brand">Brand</option>
+                <option value="ad">Ad Films</option>
+                <option value="corporate">Corporate</option>
+                <option value="animation">Animation</option>
+                <option value="documentary">Documentary</option>
+              </select>
+              <div class="flex gap-2">
+                <button
+                  onClick={() =>
+                    onUpdate(video.id, {
+                      override_url: override.trim() || null,
+                      label,
+                      category,
+                    })
+                  }
+                  class="flex-1 btn-gradient rounded py-1.5 text-sm font-semibold"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => onUpdate(video.id, { is_deleted: !video.is_deleted })}
+                  class="flex-1 glass rounded py-1.5 text-sm"
+                >
+                  {video.is_deleted ? "Show" : "Hide"}
+                </button>
+                <button
+                  onClick={() => onDelete(video.id)}
+                  class="btn-danger rounded px-3 py-1.5 text-sm"
+                >
+                  ✕
+                </button>
               </div>
             </div>
           </div>
         );
       }
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<App />);
+      function BlogPanel({ showToast }) {
+        const [posts, setPosts] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [editing, setEditing] = useState(null);
+
+        const load = useCallback(async () => {
+          setLoading(true);
+          try {
+            const res = await fetch("/api/admin/blog", { headers: authHeaders() });
+            if (res.status === 401) {
+              localStorage.removeItem(PW_KEY);
+              window.location.reload();
+              return;
+            }
+            const data = await res.json();
+            setPosts(data.posts || []);
+          } catch (e) {
+            showToast("Failed to load posts", "error");
+          }
+          setLoading(false);
+        }, []);
+
+        useEffect(() => {
+          load();
+        }, [load]);
+
+        const save = async (post) => {
+          try {
+            const res = await fetch("/api/admin/blog", {
+              method: "POST",
+              headers: authHeaders(),
+              body: JSON.stringify(post),
+            });
+            const data = await res.json();
+            if (data.success) {
+              showToast("Saved");
+              setEditing(null);
+              load();
+            } else {
+              showToast(data.error || "Save failed", "error");
+            }
+          } catch (e) {
+            showToast("Network error", "error");
+          }
+        };
+
+        const remove = async (id) => {
+          if (!confirm("Delete this post?")) return;
+          try {
+            const res = await fetch("/api/admin/blog", {
+              method: "POST",
+              headers: authHeaders(),
+              body: JSON.stringify({ id, action: "delete" }),
+            });
+            const data = await res.json();
+            if (data.success) {
+              setPosts((p) => p.filter((x) => x.id !== id));
+              showToast("Deleted");
+            } else {
+              showToast(data.error || "Delete failed", "error");
+            }
+          } catch (e) {
+            showToast("Network error", "error");
+          }
+        };
+
+        if (editing) return <BlogEditor post={editing} onSave={save} onCancel={() => setEditing(null)} />;
+
+        return (
+          <div>
+            <div class="flex justify-end mb-6">
+              <button
+                onClick={() =>
+                  setEditing({
+                    slug: "",
+                    title: "",
+                    excerpt: "",
+                    content: "",
+                    cover_image: "",
+                    is_published: true,
+                  })
+                }
+                class="btn-gradient px-5 py-2 rounded-lg font-semibold"
+              >
+                + New Post
+              </button>
+            </div>
+            {loading ? (
+              <div class="flex justify-center py-20">
+                <div class="loader"></div>
+              </div>
+            ) : (
+              <div class="grid md:grid-cols-2 gap-4">
+                {posts.map((p) => (
+                  <div key={p.id} class="glass-card rounded-2xl p-5">
+                    <div class="flex justify-between items-start gap-2 mb-2">
+                      <h3 class="font-semibold text-lg">{p.title}</h3>
+                      {!p.is_published && (
+                        <span class="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-300">
+                          Draft
+                        </span>
+                      )}
+                    </div>
+                    <p class="text-xs text-slate-400 mb-2">/blog/{p.slug}</p>
+                    <p class="text-sm text-slate-300 line-clamp-2 mb-3">{p.excerpt || ""}</p>
+                    <div class="flex gap-2">
+                      <button
+                        onClick={() => setEditing(p)}
+                        class="flex-1 btn-gradient rounded py-1.5 text-sm font-semibold"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => remove(p.id)}
+                        class="btn-danger rounded px-4 py-1.5 text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                {posts.length === 0 && (
+                  <div class="col-span-full text-center text-slate-400 py-20">No posts yet.</div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      function BlogEditor({ post, onSave, onCancel }) {
+        const [p, setP] = useState(post);
+        const update = (k, v) => setP((cur) => ({ ...cur, [k]: v }));
+
+        return (
+          <div class="glass-card rounded-2xl p-6">
+            <h2 class="text-xl font-bold mb-5 gradient-text">
+              {p.id ? "Edit Post" : "New Post"}
+            </h2>
+            <div class="grid gap-4">
+              <input
+                type="text"
+                placeholder="Title"
+                value={p.title}
+                onChange={(e) => update("title", e.target.value)}
+                class="input-glass rounded-lg px-4 py-2"
+              />
+              <input
+                type="text"
+                placeholder="slug-url-friendly"
+                value={p.slug}
+                onChange={(e) =>
+                  update(
+                    "slug",
+                    e.target.value
+                      .toLowerCase()
+                      .replace(/[^a-z0-9-]+/g, "-")
+                      .replace(/^-+|-+$/g, ""),
+                  )
+                }
+                class="input-glass rounded-lg px-4 py-2"
+              />
+              <input
+                type="text"
+                placeholder="Cover image URL"
+                value={p.cover_image || ""}
+                onChange={(e) => update("cover_image", e.target.value)}
+                class="input-glass rounded-lg px-4 py-2"
+              />
+              <textarea
+                placeholder="Short excerpt / summary"
+                value={p.excerpt || ""}
+                onChange={(e) => update("excerpt", e.target.value)}
+                rows="2"
+                class="input-glass rounded-lg px-4 py-2"
+              />
+              <textarea
+                placeholder="Post content (HTML or plain text)"
+                value={p.content || ""}
+                onChange={(e) => update("content", e.target.value)}
+                rows="14"
+                class="input-glass rounded-lg px-4 py-2 font-mono text-sm"
+              />
+              <label class="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={p.is_published !== false}
+                  onChange={(e) => update("is_published", e.target.checked)}
+                />
+                Published
+              </label>
+              <div class="flex gap-3 justify-end">
+                <button onClick={onCancel} class="glass px-5 py-2 rounded-lg">
+                  Cancel
+                </button>
+                <button
+                  onClick={() => onSave(p)}
+                  class="btn-gradient px-6 py-2 rounded-lg font-semibold"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     </script>
   </body>
 </html>
