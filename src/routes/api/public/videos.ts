@@ -1,12 +1,11 @@
-import { json } from "@tanstack/react-start";
-import { createAPIFileRoute } from "@tanstack/react-start/api";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const APIRoute = createAPIFileRoute("/api/public/videos")({
-  GET: async ({ request }) => {
-    return json({
-      items: [
-        // Add default videos or handle as needed
-      ],
-    });
+export const Route = createFileRoute("/api/public/videos")({
+  server: {
+    handlers: {
+      GET: async () => {
+        return Response.json({ items: [] });
+      },
+    },
   },
 });
