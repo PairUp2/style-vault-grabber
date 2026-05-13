@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
+import { Route as ApiAdminVideosRouteImport } from './routes/api/admin/videos'
+import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
+import { Route as ApiAdminBlogRouteImport } from './routes/api/admin/blog'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,33 +31,79 @@ const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   path: '/api/public/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminVideosRoute = ApiAdminVideosRouteImport.update({
+  id: '/api/admin/videos',
+  path: '/api/admin/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
+  id: '/api/admin/login',
+  path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminBlogRoute = ApiAdminBlogRouteImport.update({
+  id: '/api/admin/blog',
+  path: '/api/admin/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/admin/blog': typeof ApiAdminBlogRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/admin/blog': typeof ApiAdminBlogRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/admin/blog': typeof ApiAdminBlogRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/videos': typeof ApiAdminVideosRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/contact' | '/api/public/videos'
+  fullPaths:
+    | '/'
+    | '/api/admin/blog'
+    | '/api/admin/login'
+    | '/api/admin/videos'
+    | '/api/public/contact'
+    | '/api/public/videos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/contact' | '/api/public/videos'
-  id: '__root__' | '/' | '/api/public/contact' | '/api/public/videos'
+  to:
+    | '/'
+    | '/api/admin/blog'
+    | '/api/admin/login'
+    | '/api/admin/videos'
+    | '/api/public/contact'
+    | '/api/public/videos'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/admin/blog'
+    | '/api/admin/login'
+    | '/api/admin/videos'
+    | '/api/public/contact'
+    | '/api/public/videos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiAdminBlogRoute: typeof ApiAdminBlogRoute
+  ApiAdminLoginRoute: typeof ApiAdminLoginRoute
+  ApiAdminVideosRoute: typeof ApiAdminVideosRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
   ApiPublicVideosRoute: typeof ApiPublicVideosRoute
 }
@@ -82,11 +131,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/videos': {
+      id: '/api/admin/videos'
+      path: '/api/admin/videos'
+      fullPath: '/api/admin/videos'
+      preLoaderRoute: typeof ApiAdminVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/login': {
+      id: '/api/admin/login'
+      path: '/api/admin/login'
+      fullPath: '/api/admin/login'
+      preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/blog': {
+      id: '/api/admin/blog'
+      path: '/api/admin/blog'
+      fullPath: '/api/admin/blog'
+      preLoaderRoute: typeof ApiAdminBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiAdminBlogRoute: ApiAdminBlogRoute,
+  ApiAdminLoginRoute: ApiAdminLoginRoute,
+  ApiAdminVideosRoute: ApiAdminVideosRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,
   ApiPublicVideosRoute: ApiPublicVideosRoute,
 }

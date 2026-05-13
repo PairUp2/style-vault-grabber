@@ -75,7 +75,12 @@ export const Route = createFileRoute("/api/admin/videos")({
           return Response.json({ success: true });
         }
 
-        const update: Record<string, unknown> = {};
+        const update: {
+          override_url?: string | null;
+          is_deleted?: boolean;
+          label?: string;
+          category?: string;
+        } = {};
         if (override_url !== undefined) update.override_url = override_url;
         if (is_deleted !== undefined) update.is_deleted = is_deleted;
         if (label !== undefined) update.label = label;
