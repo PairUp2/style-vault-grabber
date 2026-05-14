@@ -1,24 +1,10 @@
 {
   "framework": null,
   "buildCommand": "npm run build && cp dist/client/cynex-runtime.js dist/client/site/cynex-runtime.js",
-  "outputDirectory": "dist/client/site",
+  "outputDirectory": "dist/client",
   "installCommand": "npm install",
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/site", "destination": "/" },
-    { "source": "/site/", "destination": "/" },
-    { "source": "/animation", "destination": "/avatar-motion-graphics" },
-    { "source": "/ad-films", "destination": "/ad-films-maker-in-bangalore" },
-    { "source": "/brand-videos", "destination": "/brand-video-production-services-in-bangalore" },
-    { "source": "/corporate", "destination": "/avatar-corporate-films" },
-    { "source": "/creative-agency", "destination": "/creative-agency-and-digital-agency" },
-    { "source": "/documentary", "destination": "/documentary-film-maker-in-bangalore" },
-    { "source": "/explainer-videos", "destination": "/explainer-video-production-in-bangalore" },
-    { "source": "/music-videos", "destination": "/music-video-production-services-in-bangalore" },
-    { "source": "/terms", "destination": "/terms-and-conditions" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/enquiry", "destination": "/enquiry.html" },
-    { "source": "/site/(.*)", "destination": "/$1" }
+    { "source": "/(.*)", "destination": "/site/$1" }
   ]
 }
