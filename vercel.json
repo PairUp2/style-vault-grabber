@@ -5,8 +5,6 @@
   "installCommand": "",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/wp-content/(.*)", "destination": "https://www.avatarstudios.in/wp-content/$1" },
-    { "source": "/wp-includes/(.*)", "destination": "https://www.avatarstudios.in/wp-includes/$1" },
-    { "source": "/uploads/(.*)", "destination": "https://www.avatarstudios.in/wp-content/uploads/$1" }
+    { "source": "/site/(.*)", "destination": "/$1" }
   ]
 }
