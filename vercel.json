@@ -1,10 +1,12 @@
 {
   "framework": null,
-  "buildCommand": "npm run build && cp dist/client/cynex-runtime.js dist/client/site/cynex-runtime.js",
-  "outputDirectory": "dist/client",
-  "installCommand": "npm install",
+  "buildCommand": "node vercel-build.js",
+  "outputDirectory": "dist/vercel",
+  "installCommand": "",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/site/$1" }
+    { "source": "/wp-content/(.*)", "destination": "https://www.avatarstudios.in/wp-content/$1" },
+    { "source": "/wp-includes/(.*)", "destination": "https://www.avatarstudios.in/wp-includes/$1" },
+    { "source": "/uploads/(.*)", "destination": "https://www.avatarstudios.in/wp-content/uploads/$1" }
   ]
 }
