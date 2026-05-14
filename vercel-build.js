@@ -42,6 +42,7 @@ const PATH_OVERRIDES = {
   "avatar-case-study-basil-woods": "about",
   "avatar-case-study-seonics": "about",
   "podcast-studios-bangalore": "video-production",
+  "video-production/animation-video-makers-in-bangalore": "avatar-motion-graphics",
 };
 
 function resolvePagePath(rawPath) {
@@ -66,11 +67,22 @@ function injectRuntimeScript(html) {
 }
 
 function fixAssetPaths(html) {
-  return html
+  html = html
     .replace(/="\/site\//g, '="/')
     .replace(/="\/site"/g, '="/"')
     .replace(/'\/site\//g, "'/")
     .replace(/'\/site'/g, "'/'");
+  // Fix srcset attribute (comma-separated URLs with widths)
+  html = html.replace(/srcset="[^"]*\/site\/[^"]*"/g, (m) => m.replace(/\/site\//g, "/"));
+  html = html.replace(/srcset='[^']*\/site\/[^']*'/g, (m) => m.replace(/\/site\//g, "/"));
+  // Fix CSS url() references in inline styles and style blocks
+  html = html.replace(/url\(\s*['"]?\/site\//g, "url(/");
+  return html;
+}
+
+function injectFavicon(html) {
+  if (html.includes('rel="icon"')) return html;
+  return html.replace("</head>", '<link rel="icon" type="image/png" href="/favicon.ico"></head>');
 }
 
 function fixNavigationLinks(html) {
@@ -84,6 +96,7 @@ function fixNavigationLinks(html) {
 
 function processHtml(content) {
   content = injectRuntimeScript(content);
+  content = injectFavicon(content);
   content = fixNavigationLinks(content); // must run before fixAssetPaths (needs /site/ prefix)
   content = fixAssetPaths(content);
   return content;
@@ -187,6 +200,32 @@ const runtimeSrc = path.resolve(__dirname, "public/cynex-runtime.js");
 let runtimeJs = fs.readFileSync(runtimeSrc, "utf-8");
 runtimeJs = runtimeJs.replace(/\/site\//g, "/"); // Fix hardcoded /site/ paths in JS
 fs.writeFileSync(path.join(OUT_DIR, "cynex-runtime.js"), runtimeJs, "utf-8");
+
+// Copy favicon to root
+const faviconSrc = path.join(SITE_SRC, "wp-content/uploads/2023/03/favicon.png");
+if (fs.existsSync(faviconSrc)) {
+  fs.copyFileSync(faviconSrc, path.join(OUT_DIR, "favicon.ico"));
+  console.log("   Favicon copied");
+} else {
+  console.warn("   ⚠ Favicon not found at", faviconSrc);
+}
+
+// Replace Google Fonts local CSS (broken WOFF2 paths) with CDN @import URLs
+const fontCssDir = path.join(OUT_DIR, "wp-content/uploads/elementor/google-fonts/css");
+const fontReplacements = {
+  "nunitosans.css": "@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n",
+  "poppins.css": "@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n",
+  "nunito.css": "@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n",
+};
+for (const [file, content] of Object.entries(fontReplacements)) {
+  const fp = path.join(fontCssDir, file);
+  if (fs.existsSync(fp)) {
+    fs.writeFileSync(fp, content, "utf-8");
+    console.log("   Replaced font CSS:", file);
+  } else {
+    console.warn("   ⚠ Font CSS not found:", fp);
+  }
+}
 
 // Write 404 page
 fs.writeFileSync(path.join(OUT_DIR, "404.html"), create404Page(), "utf-8");

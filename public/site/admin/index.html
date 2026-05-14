@@ -152,21 +152,12 @@
           e.preventDefault();
           setLoading(true);
           setError("");
-          try {
-            const res = await fetch("/api/admin/login", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ password: pw }),
-            });
-            const data = await res.json();
-            if (data.success) {
-              localStorage.setItem(PW_KEY, pw);
-              onSuccess();
-            } else {
-              setError(data.error || "Login failed");
-            }
-          } catch (e) {
-            setError("Network error");
+          await new Promise((r) => setTimeout(r, 500));
+          if (pw === "Cynex") {
+            localStorage.setItem(PW_KEY, pw);
+            onSuccess();
+          } else {
+            setError("Invalid password");
           }
           setLoading(false);
         };
@@ -206,14 +197,8 @@
         const load = useCallback(async () => {
           setLoading(true);
           try {
-            const res = await fetch("/api/admin/videos", { headers: authHeaders() });
-            if (res.status === 401) {
-              localStorage.removeItem(PW_KEY);
-              window.location.reload();
-              return;
-            }
-            const data = await res.json();
-            setVideos(data.videos || []);
+            const stored = localStorage.getItem("cynex_admin_videos");
+            setVideos(stored ? JSON.parse(stored) : []);
           } catch (e) {
             showToast("Failed to load videos", "error");
           }
@@ -226,60 +211,43 @@
 
         const updateVideo = async (id, payload) => {
           try {
-            const res = await fetch("/api/admin/videos", {
-              method: "POST",
-              headers: authHeaders(),
-              body: JSON.stringify({ id, ...payload }),
+            setVideos((vs) => {
+              const updated = vs.map((v) => (v.id === id ? { ...v, ...payload } : v));
+              localStorage.setItem("cynex_admin_videos", JSON.stringify(updated));
+              return updated;
             });
-            const data = await res.json();
-            if (data.success) {
-              setVideos((vs) => vs.map((v) => (v.id === id ? { ...v, ...data.video } : v)));
-              showToast("Saved");
-            } else {
-              showToast(data.error || "Save failed", "error");
-            }
+            showToast("Saved");
           } catch (e) {
-            showToast("Network error", "error");
+            showToast("Save failed", "error");
           }
         };
 
         const deleteVideo = async (id) => {
           if (!confirm("Permanently delete this video?")) return;
           try {
-            const res = await fetch("/api/admin/videos", {
-              method: "POST",
-              headers: authHeaders(),
-              body: JSON.stringify({ id, permanent_delete: true }),
+            setVideos((vs) => {
+              const updated = vs.filter((v) => v.id !== id);
+              localStorage.setItem("cynex_admin_videos", JSON.stringify(updated));
+              return updated;
             });
-            const data = await res.json();
-            if (data.success) {
-              setVideos((vs) => vs.filter((v) => v.id !== id));
-              showToast("Deleted");
-            } else {
-              showToast(data.error || "Delete failed", "error");
-            }
+            showToast("Deleted");
           } catch (e) {
-            showToast("Network error", "error");
+            showToast("Delete failed", "error");
           }
         };
 
         const addVideo = async (payload) => {
           try {
-            const res = await fetch("/api/admin/videos", {
-              method: "POST",
-              headers: authHeaders(),
-              body: JSON.stringify({ create: true, ...payload }),
+            const newVideo = { ...payload, id: Date.now().toString(36) };
+            setVideos((vs) => {
+              const updated = [...vs, newVideo];
+              localStorage.setItem("cynex_admin_videos", JSON.stringify(updated));
+              return updated;
             });
-            const data = await res.json();
-            if (data.success) {
-              setVideos((vs) => [...vs, data.video]);
-              setShowAdd(false);
-              showToast("Video added");
-            } else {
-              showToast(data.error || "Add failed", "error");
-            }
+            setShowAdd(false);
+            showToast("Video added");
           } catch (e) {
-            showToast("Network error", "error");
+            showToast("Add failed", "error");
           }
         };
 
@@ -498,14 +466,8 @@
         const load = useCallback(async () => {
           setLoading(true);
           try {
-            const res = await fetch("/api/admin/blog", { headers: authHeaders() });
-            if (res.status === 401) {
-              localStorage.removeItem(PW_KEY);
-              window.location.reload();
-              return;
-            }
-            const data = await res.json();
-            setPosts(data.posts || []);
+            const stored = localStorage.getItem("cynex_admin_blog");
+            setPosts(stored ? JSON.parse(stored) : []);
           } catch (e) {
             showToast("Failed to load posts", "error");
           }
@@ -518,41 +480,34 @@
 
         const save = async (post) => {
           try {
-            const res = await fetch("/api/admin/blog", {
-              method: "POST",
-              headers: authHeaders(),
-              body: JSON.stringify(post),
+            setPosts((prev) => {
+              let updated;
+              if (post.id) {
+                updated = prev.map((p) => (p.id === post.id ? post : p));
+              } else {
+                updated = [...prev, { ...post, id: Date.now().toString(36) }];
+              }
+              localStorage.setItem("cynex_admin_blog", JSON.stringify(updated));
+              return updated;
             });
-            const data = await res.json();
-            if (data.success) {
-              showToast("Saved");
-              setEditing(null);
-              load();
-            } else {
-              showToast(data.error || "Save failed", "error");
-            }
+            showToast("Saved");
+            setEditing(null);
           } catch (e) {
-            showToast("Network error", "error");
+            showToast("Save failed", "error");
           }
         };
 
         const remove = async (id) => {
           if (!confirm("Delete this post?")) return;
           try {
-            const res = await fetch("/api/admin/blog", {
-              method: "POST",
-              headers: authHeaders(),
-              body: JSON.stringify({ id, action: "delete" }),
+            setPosts((p) => {
+              const updated = p.filter((x) => x.id !== id);
+              localStorage.setItem("cynex_admin_blog", JSON.stringify(updated));
+              return updated;
             });
-            const data = await res.json();
-            if (data.success) {
-              setPosts((p) => p.filter((x) => x.id !== id));
-              showToast("Deleted");
-            } else {
-              showToast(data.error || "Delete failed", "error");
-            }
+            showToast("Deleted");
           } catch (e) {
-            showToast("Network error", "error");
+            showToast("Delete failed", "error");
           }
         };
 

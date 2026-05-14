@@ -232,14 +232,12 @@
   function init() {
     wireForms();
     addAdminButton();
-    fetch("/api/public/videos")
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (d) {
-        applyVideoOverrides(d.items || []);
-      })
-      .catch(function () {});
+    try {
+      var stored = localStorage.getItem("cynex_admin_videos");
+      if (stored) {
+        applyVideoOverrides(JSON.parse(stored));
+      }
+    } catch (e) {}
   }
 
   if (document.readyState === "loading") {
