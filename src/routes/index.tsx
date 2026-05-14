@@ -1,31 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  component: Home,
+  component: Page,
   head: () => ({
     meta: [
-      { title: "CYNEX Production - Video Production Company in Rajkot & Ahmedabad" },
-      {
-        name: "description",
-        content:
-          "CYNEX Production is a leading video production company in Rajkot & Ahmedabad offering brand films, ad films, corporate videos, and more.",
-      },
+      { title: "Creative Agency in Rajkot & Ahmedabad, Production agencies" },
+      { name: "description", content: "Discover CYNEX Production, a leading creative agency and production house in Rajkot & Ahmedabad, specializing in video production and branding." },
+      { property: "og:title", content: "Creative Agency in Rajkot & Ahmedabad, Production agencies" },
+      { property: "og:description", content: "Discover CYNEX Production, a leading creative agency and production house in Rajkot & Ahmedabad, specializing in video production and branding." },
     ],
   }),
 });
 
-function Home() {
+function Page() {
   return (
     <iframe
       src="/site/index.html"
-      title="CYNEX Production"
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100vw",
-        height: "100vh",
-        border: 0,
-      }}
+      title="Creative Agency in Rajkot & Ahmedabad, Production agencies"
+      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
     />
   );
 }
