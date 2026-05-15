@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/refund-policy")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/refund-policy")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/refund-policy/index.html"
-      title="Refund Policy - CYNEX Production"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/refund-policy/index.html" />;
 }

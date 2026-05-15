@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/creative-agency")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/creative-agency")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/creative-agency-and-digital-agency/index.html"
-      title="Creative Agency and Digital Agency - CYNEX Production"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/creative-agency-and-digital-agency/index.html" />;
 }

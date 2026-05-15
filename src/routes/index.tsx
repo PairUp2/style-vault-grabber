@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/index.html"
-      title="Creative Agency in Rajkot & Ahmedabad, Production agencies"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/index.html" />;
 }

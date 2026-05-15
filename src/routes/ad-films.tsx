@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/ad-films")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/ad-films")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/ad-films-maker-in-bangalore/index.html"
-      title="Films Maker Agency in Rajkot &amp; Ahmedabad"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/ad-films-maker-in-bangalore/index.html" />;
 }
