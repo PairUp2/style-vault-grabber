@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/music-videos")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/music-videos")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/music-video-production-services-in-bangalore.html"
-      title="Music Video Production Agency in Rajkot &amp; Ahmedabad"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/music-video-production-services-in-bangalore.html" />;
 }

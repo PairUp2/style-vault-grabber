@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/terms")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/terms")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/terms-and-conditions/index.html"
-      title="Agency Terms and Conditions-CYNEX Production"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/terms-and-conditions/index.html" />;
 }

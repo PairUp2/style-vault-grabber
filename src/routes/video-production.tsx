@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/video-production")({
   component: Page,
@@ -13,11 +14,5 @@ export const Route = createFileRoute("/video-production")({
 });
 
 function Page() {
-  return (
-    <iframe
-      src="/site/video-production/index.html"
-      title="Video Production company in Rajkot &amp; Ahmedabad, Production house in Rajkot &amp; Ahmedabad"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+  return <HtmlPage src="/site/video-production/index.html" />;
 }
