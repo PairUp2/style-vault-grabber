@@ -1,21 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HtmlPage } from "@/components/HtmlPage";
 
 export const Route = createFileRoute("/admin")({
-  component: Admin,
+  component: Page,
   head: () => ({
     meta: [
       { title: "CYNEX Admin" },
-      { name: "robots", content: "noindex,nofollow" },
+      { name: "description", content: "" },
     ],
   }),
 });
 
-function Admin() {
-  return (
-    <iframe
-      src="/site/admin/index.html"
-      title="CYNEX Admin"
-      style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", border: 0 }}
-    />
-  );
+function Page() {
+  return <HtmlPage src="/site/admin/index.html" />;
 }
