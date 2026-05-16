@@ -1197,7 +1197,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/site/ad-films-maker-in-bangalore.html">
+																						<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/ad-films">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1234,7 +1234,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/site/brand-video-production-services-in-bangalore.html">
+																						<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/brand-videos">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 511.993 511.993" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -1272,7 +1272,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/avatar-corporate-films/">
+																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/corporate">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 66 66" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1380,7 +1380,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/site/documentary-film-maker-in-bangalore.html">
+																						<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/documentary">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -1484,7 +1484,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/site/avatar-stock-footage-commercial/">
+																						<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/corporate">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1573,7 +1573,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/explainer-video-production-in-bangalore.html">
+																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/explainer-videos">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -1625,7 +1625,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/site/avatar-motion-graphics.html">
+																						<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/animation">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1887,7 +1887,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/site/ad-films-maker-in-bangalore.html">
+																						<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/ad-films">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1924,7 +1924,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/site/brand-video-production-services-in-bangalore.html">
+																						<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/brand-videos">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 511.993 511.993" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -1962,7 +1962,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/avatar-corporate-films/">
+																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/corporate">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 66 66" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -1996,7 +1996,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/site/documentary-film-maker-in-bangalore.html">
+																						<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/documentary">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -2027,7 +2027,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/site/avatar-stock-footage-commercial/">
+																						<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/corporate">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -2058,7 +2058,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/explainer-video-production-in-bangalore.html">
+																						<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/explainer-videos">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -2110,7 +2110,7 @@ const BODY_HTML = `
 																			<div class="ekit-wid-con">
 																				<div class="elementor-icon-list-items ">
 																					<div class="elementor-icon-list-item   ">
-																						<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/site/avatar-motion-graphics.html">
+																						<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/animation">
 																							<div class="ekit_page_list_content">
 																								<span class="elementor-icon-list-icon">
 																									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -2320,7 +2320,7 @@ const BODY_HTML = `
 													</div>
 												</div>
 											</li>
-											<li id="menu-item-19352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19352 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/animation-video-makers-in-bangalore.html" class="ekit-menu-nav-link">Animation</a></li>
+											<li id="menu-item-19352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19352 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/animation" class="ekit-menu-nav-link">Animation</a></li>
 											<li id="menu-item-19325" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19325 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/about.html" class="ekit-menu-nav-link">About</a></li>
 											<li id="menu-item-24477" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24477 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/contact.html" class="ekit-menu-nav-link">Contact</a></li>
 											<li id="menu-item-27415" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-7591 current_page_item menu-item-27415 nav-item elementskit-mobile-builder-content active" data-vertical-menu="750px"><a href="/site/blog.html" class="ekit-menu-nav-link active">Blog</a></li>
@@ -2399,7 +2399,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/site/ad-films-maker-in-bangalore.html">
+																								<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/ad-films">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -2439,7 +2439,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/site/brand-video-production-services-in-bangalore.html">
+																								<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/brand-videos">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 511.993 511.993" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -2482,7 +2482,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/avatar-corporate-films/">
+																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/corporate">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 66 66" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -2597,7 +2597,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/site/documentary-film-maker-in-bangalore.html">
+																								<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/documentary">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -2710,7 +2710,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/site/avatar-stock-footage-commercial/">
+																								<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/corporate">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -2807,7 +2807,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/explainer-video-production-in-bangalore.html">
+																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/explainer-videos">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -2862,7 +2862,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/site/avatar-motion-graphics.html">
+																								<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/animation">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -3130,7 +3130,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/site/ad-films-maker-in-bangalore.html">
+																								<a class="elementor-repeater-item-18cb473 ekit_badge_left" href="/ad-films">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -3170,7 +3170,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/site/brand-video-production-services-in-bangalore.html">
+																								<a class="elementor-repeater-item-a305182 ekit_badge_left" href="/brand-videos">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 511.993 511.993" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -3213,7 +3213,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/avatar-corporate-films/">
+																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/corporate">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 66 66" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -3251,7 +3251,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/site/documentary-film-maker-in-bangalore.html">
+																								<a class="elementor-repeater-item-47ded14 ekit_badge_left" href="/documentary">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -3285,7 +3285,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/site/avatar-stock-footage-commercial/">
+																								<a class="elementor-repeater-item-ccc1b19 ekit_badge_left" href="/corporate">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -3320,7 +3320,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/site/explainer-video-production-in-bangalore.html">
+																								<a class="elementor-repeater-item-7a3db66 ekit_badge_left" href="/explainer-videos">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
@@ -3375,7 +3375,7 @@ const BODY_HTML = `
 																					<div class="ekit-wid-con">
 																						<div class="elementor-icon-list-items ">
 																							<div class="elementor-icon-list-item   ">
-																								<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/site/avatar-motion-graphics.html">
+																								<a class="elementor-repeater-item-d664266 ekit_badge_left" href="/animation">
 																									<div class="ekit_page_list_content">
 																										<span class="elementor-icon-list-icon">
 																											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -3589,7 +3589,7 @@ const BODY_HTML = `
 															</div>
 														</div>
 													</li>
-													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19352 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/animation-video-makers-in-bangalore.html" class="ekit-menu-nav-link">Animation</a></li>
+													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19352 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/animation" class="ekit-menu-nav-link">Animation</a></li>
 													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19325 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/about.html" class="ekit-menu-nav-link">About</a></li>
 													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24477 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a href="/site/contact.html" class="ekit-menu-nav-link">Contact</a></li>
 													<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-7591 current_page_item menu-item-27415 nav-item elementskit-mobile-builder-content active" data-vertical-menu="750px"><a href="/site/blog.html" class="ekit-menu-nav-link active">Blog</a></li>
@@ -7707,14 +7707,14 @@ const BODY_HTML = `
 										<div class="eael-grid-post-holder">
 											<div class="eael-grid-post-holder-inner">
 												<div class="eael-entry-media">
-													<div class="eael-entry-overlay fade-in"><i class="" aria-hidden="true"></i><a href="/site/creative-agency-and-digital-agency/"></a></div>
+													<div class="eael-entry-overlay fade-in"><i class="" aria-hidden="true"></i><a href="/creative-agency"></a></div>
 													<div class="eael-entry-thumbnail ">
 														<img loading="lazy" decoding="async" width="870" height="588" src="/site/wp-content/uploads/2023/04/digital-creative-landing.webp" class="attachment-full size-full wp-image-3823" alt="creative agency and digital agency" srcset="/site/wp-content/uploads/2023/04/digital-creative-landing.webp 870w, /site/wp-content/uploads/2023/04/digital-creative-landing-300x203.webp 300w, /site/wp-content/uploads/2023/04/digital-creative-landing-768x519.webp 768w, /site/wp-content/uploads/2023/04/digital-creative-landing-500x338.webp 500w, /site/wp-content/uploads/2023/04/digital-creative-landing-800x541.webp 800w" sizes="(max-width: 870px) 100vw, 870px">
 													</div>
 												</div>
 												<div class="eael-entry-wrapper">
 													<header class="eael-entry-header">
-														<h2 class="eael-entry-title"><a class="eael-grid-post-link" href="/site/creative-agency-and-digital-agency/" title="Creative Agency and Digital Agency">Creative
+														<h2 class="eael-entry-title"><a class="eael-grid-post-link" href="/creative-agency" title="Creative Agency and Digital Agency">Creative
 																Agency and Digital Agency</a></h2>
 													</header>
 													<div class="eael-entry-header-after">
@@ -7722,7 +7722,7 @@ const BODY_HTML = `
 													</div>
 													<div class="eael-entry-content">
 														<div class="eael-grid-post-excerpt">
-															<p>Your business is like a child. From the time you...</p><a href="/site/creative-agency-and-digital-agency/" class="eael-post-elements-readmore-btn">Read More</a>
+															<p>Your business is like a child. From the time you...</p><a href="/creative-agency" class="eael-post-elements-readmore-btn">Read More</a>
 														</div>
 													</div>
 												</div>
@@ -8095,7 +8095,7 @@ const BODY_HTML = `
 													<a href="/site/blog.html" class="hfe-menu-item">Blog</a>
 												</li>
 												<li id="menu-item-8151" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">
-													<a href="/site/terms-and-conditions/" class="hfe-menu-item">Terms
+													<a href="/terms" class="hfe-menu-item">Terms
 														and Conditions</a>
 												</li>
 												<li id="menu-item-8153" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu">

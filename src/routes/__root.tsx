@@ -29,6 +29,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  notFoundComponent: NotFoundPage,
 });
 
 function RootComponent() {
@@ -51,5 +52,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "2rem" }}>
+      <div style={{ textAlign: "center" }}>
+        <h1>Page not found</h1>
+        <p>This page is no longer available.</p>
+        <a href="/">Go home</a>
+      </div>
+    </main>
   );
 }
