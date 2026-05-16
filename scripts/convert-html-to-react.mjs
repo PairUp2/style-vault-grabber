@@ -37,7 +37,27 @@ const PAGES = [
   { route: "/refund-policy",     file: "refund-policy.tsx",    html: "refund-policy/index.html" },
   { route: "/cookie-policy",     file: "cookie-policy.tsx",    html: "cookie-policy/index.html" },
   { route: "/admin",             file: "admin.tsx",            html: "admin/index.html" },
+  { route: "/video-production/video-production-company-in-hyderabad", file: "video-production.video-production-company-in-hyderabad.tsx", html: "video-production/video-production-company-in-hyderabad/index.html" },
+  { route: "/video-production/video-production-company-in-mysore", file: "video-production.video-production-company-in-mysore.tsx", html: "video-production/video-production-company-in-mysore/index.html" },
+  { route: "/video-production/video-production-company-in-pune", file: "video-production.video-production-company-in-pune.tsx", html: "video-production/video-production-company-in-pune/index.html" },
 ];
+
+const ROUTE_ALIASES = {
+  "/ad-films-maker-in-bangalore": "/ad-films",
+  "/brand-video-production-services-in-bangalore": "/brand-videos",
+  "/avatar-corporate-films": "/corporate",
+  "/avatar-motion-graphics": "/animation",
+  "/documentary-film-maker-in-bangalore": "/documentary",
+  "/explainer-video-production-in-bangalore": "/explainer-videos",
+  "/music-video-production-services-in-bangalore": "/music-videos",
+  "/creative-agency-and-digital-agency": "/creative-agency",
+  "/terms-and-conditions": "/terms",
+  "/video-production/ad-films-maker-in-bangalore": "/ad-films",
+  "/video-production/documentary-film-maker-in-bangalore": "/documentary",
+  "/avatar-stock-footage-commercial": "/corporate",
+  "/animation-video-makers-in-bangalore": "/animation",
+  "/event-video-coverage-services-in-bangalore": "/video-production",
+};
 
 const esc = (s) => (s ?? "").replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${");
 const escAttr = (s) => (s ?? "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
@@ -45,6 +65,19 @@ const escAttr = (s) => (s ?? "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 function rewriteUrl(u, baseDir) {
   if (!u) return u;
   if (/^(https?:|data:|mailto:|tel:|#|\/\/)/i.test(u)) return u;
+  const match = u.match(/^([^?#]+)([?#].*)?$/);
+  const rawPath = match?.[1] || u;
+  const suffix = match?.[2] || "";
+  const withoutSite = rawPath.startsWith("/site/") ? rawPath.slice(5) : rawPath;
+  const absolutePath = withoutSite.startsWith("/")
+    ? withoutSite
+    : path.posix.normalize(path.posix.join("/", baseDir, withoutSite));
+  const normalizedPagePath = absolutePath
+    .replace(/\/index\.html$/i, "")
+    .replace(/\.html?$/i, "")
+    .replace(/\/$/, "") || "/";
+  const alias = ROUTE_ALIASES[normalizedPagePath];
+  if (alias) return `${alias}${suffix}`;
   if (u.startsWith("/site/")) return u;
   if (u.startsWith("/")) return "/site" + u;
   // relative
